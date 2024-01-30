@@ -1,17 +1,28 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import GoslItems from "./components/GoslItems";
 
 export default function App() {
   const [entered, setEntered] = useState("");
 
   const [courseGoal, setCourseGoal] = useState([]);
 
+  let real = entered.trim("").length === 0;
+
   const goalInputHandler = (en) => {
     setEntered(en);
   };
   const addGoalHandler = () => {
-    setCourseGoal((current) => [...current, entered]);
-    setEntered('')
+    setCourseGoal((current) => [...current, {Text:entered, key: Math.random().toString()}]);
+    setEntered("");
   };
   return (
     <View style={styles.appCountainr}>
@@ -22,12 +33,24 @@ export default function App() {
           value={entered}
           onChangeText={goalInputHandler}
         />
-        <Button title='adding' onPress={addGoalHandler} />
+        <Button
+          title='adding'
+          onPress={addGoalHandler}
+          disabled={real}
+          color='#5e0acc'
+        />
       </View>
       <View style={styles.goalsCountainer}>
-        {courseGoal.map((tt,t) => (
-          <Text key={t}>{tt}</Text>
-        ))}
+        <FlatList
+          data={courseGoal}
+          renderItem={(itemData) => {
+            return (
+
+            <GoslItems Text={itemData.item.Text}/>
+
+            );
+          }}
+        />
       </View>
     </View>
   );
