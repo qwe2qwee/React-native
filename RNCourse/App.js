@@ -1,53 +1,42 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 import GoslItems from "./components/GoslItems";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [entered, setEntered] = useState("");
-
   const [courseGoal, setCourseGoal] = useState([]);
+  const [modalIsVisible, setModal] = useState(false);
 
-  let real = entered.trim("").length === 0;
+  const changed = () => {
+    setModal(true);
+  };
+  const addGoalHandler = (tttt) => {
+    setCourseGoal((current) => [
+      ...current,
+      { Text: tttt, id: Math.random().toString() },
+    ]);
+  };
 
-  const goalInputHandler = (en) => {
-    setEntered(en);
+  const deletGoalHandler = (id) => {
+    setCourseGoal((currentCourseGoals) => {
+      return currentCourseGoals.filter((goal) => goal.id !== id);
+    });
   };
-  const addGoalHandler = () => {
-    setCourseGoal((current) => [...current, {Text:entered, key: Math.random().toString()}]);
-    setEntered("");
-  };
+
   return (
     <View style={styles.appCountainr}>
-      <View style={styles.inputCountainer}>
-        <TextInput
-          placeholder='add your goals'
-          style={styles.inputText}
-          value={entered}
-          onChangeText={goalInputHandler}
-        />
-        <Button
-          title='adding'
-          onPress={addGoalHandler}
-          disabled={real}
-          color='#5e0acc'
-        />
-      </View>
+      <Button title='Add New Goal' color='#5e0acc' onPress={changed} />
+      <GoalInput onAddGoal={addGoalHandler} visible={modalIsVisible} />
       <View style={styles.goalsCountainer}>
         <FlatList
           data={courseGoal}
           renderItem={(itemData) => {
             return (
-
-            <GoslItems Text={itemData.item.Text}/>
-
+              <GoslItems
+                Text={itemData.item.Text}
+                id={itemData.item.id}
+                onDelete={deletGoalHandler}
+              />
             );
           }}
         />
@@ -63,25 +52,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  inputCountainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    flex: 1,
-  },
   goalsCountainer: {
     flex: 6,
-  },
-
-  inputText: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    flex: 1,
-    alignItems: "center",
-    width: "70%",
-    padding: 8,
-    marginRight: 8,
   },
 });
