@@ -1,14 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import InputLongPass from "./components/inputsLong/InputLongPass";
 // import InputLong from "./components/inputsLong/inputLong";
-import Inputs from "./components/inputsShort/inputs";
+import Sinup from "./page/Sinup";
+import Button from "./components/Button";
 export default function App() {
   return (
     <View style={styles.container}>
       <View style={styles.in}>
-        <Inputs name1={'try1'} name2={'try2'}/>
-        <InputLongPass name='new'/>
+        <Button title={"تسجيل الدخول"}/>
       </View>
     </View>
   );
@@ -20,11 +19,12 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     alignItems: "center",
     justifyContent: "center",
-    width:"100%",
-    padding:10,
+    textAlign: "center",
+    width: "100%",
+    padding: 10,
   },
-  in:{
-    width:'100%',
-    margin:"auto"
-  }
+  in: {
+    width: "90%",
+    margin: "auto",
+  },
 });

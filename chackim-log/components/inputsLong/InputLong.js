@@ -8,7 +8,7 @@ const InputLong = (props) => {
       <Text style={styles.text}>{props.name}</Text>
       <TextInput
         multiline
-        placeholder='Enter multiple lines of text'
+        style={styles.input}
         onChangeText={(text) => console.log(text)}
       />
     </View>
@@ -17,7 +17,7 @@ const InputLong = (props) => {
 
 const styles = StyleSheet.create({
   coun: {
-    width: "80%",
+    width: "100%",
     padding: 3,
   },
   text: {
@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#F2F3F7",
-    borderRadius: 10,
-    width: "100%",
-    marginBottom: 2,
-    height: 30,
-    padding: 5,
+    borderRadius:20,
+    width:"100%",
+    marginBottom:2,
+    height:30,
+    padding:5
   },
 });
 

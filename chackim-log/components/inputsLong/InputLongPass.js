@@ -8,7 +8,6 @@ const InputLongPass = (props) => {
       <TextInput
         style={styles.input}
         secureTextEntry
-        placeholder='Enter password'
         onChangeText={(password) => console.log(password)}
       />
     </View>
@@ -17,7 +16,7 @@ const InputLongPass = (props) => {
 
 const styles = StyleSheet.create({
   coun:{
-    width:'80%',
+    width:'100%',
     padding:3
   },
   text: {
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#F2F3F7",
-    borderRadius:10,
+    borderRadius:20,
     width:"100%",
     marginBottom:2,
     height:30,
