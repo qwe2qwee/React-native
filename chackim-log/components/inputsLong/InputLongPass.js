@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
 
   input: {
     backgroundColor: "#F2F3F7",
-    borderRadius:20,
+    borderRadius:40,
     width:"100%",
     marginBottom:2,
-    height:30,
-    padding:5
+    height:35,
+    padding:6,
   },
 });
 
