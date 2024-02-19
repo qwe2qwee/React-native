@@ -1,22 +1,44 @@
-import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, TextInput, StyleSheet, Alert } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({onConfirm}) => {
+  const [enteredNumber, setEnteredNumber] = useState("");
+
+  const numberHandler = (enteredText) => {
+    setEnteredNumber(enteredText);
+  };
+
+  const resetInputHandler = () => {
+    setEnteredNumber("");
+  };
+
+  const confirmInputHandler = () => {
+    const chosenNumber = parseInt(enteredNumber);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert("خطأ", "يجب أن يكون الرقم صحيحًا وأكبر من الصفر", [
+        { text: "حسنا", style: "destructive", onPress: resetInputHandler },
+      ]);
+      return;
+    }
+    onConfirm(chosenNumber)
+  };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
-        keyboardType='number-pad'
+        keyboardType="number-pad"
+        value={enteredNumber}
+        onChangeText={numberHandler}
       />
-
-      <View style={styles.btutonsC}>
-        <View style={styles.bottuonsc}>
-          <PrimaryButton>Reset</PrimaryButton>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.button}>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
-        <View style={styles.bottuonsc}>
-          <PrimaryButton>Confirm</PrimaryButton>
+        <View style={styles.button}>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
         </View>
       </View>
     </View>
@@ -28,7 +50,7 @@ export default StartGameScreen;
 const styles = StyleSheet.create({
   inputContainer: {
     alignItems: "center",
-    backgroundColor: "#B2A4FF",
+    backgroundColor: "#9e8cff",
     padding: 16,
     marginTop: 100,
     marginHorizontal: 24,
@@ -49,14 +71,13 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontWeight: "bold",
     fontSize: 32,
-    margin: "auto",
   },
-
-  btutonsC: {
+  buttonsContainer: {
     flexDirection: "row",
+    marginTop: 16,
   },
-  bottuonsc:{
-    flex:1
-  }
-
+  button: {
+    flex: 1,
+    marginHorizontal: 8,
+  },
 });
