@@ -15,7 +15,7 @@ export default function App() {
   let screen = <StartGameScreen onConfirm={pickedNumberHandler} />;
 
   if (userNumber) {
-    screen = <GameScreen />;
+    screen = <GameScreen userNumber={userNumber} />;
   }
   return (
     <LinearGradient colors={["#B2A4FF", "#FFB4B4"]} style={styles.background}>
@@ -33,6 +33,7 @@ export default function App() {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
+    paddingTop: 2,
   },
 
   backgroundImage: {

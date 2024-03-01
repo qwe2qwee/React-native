@@ -1,11 +1,7 @@
-import { Text } from 'react-native'
+import { Text } from "react-native";
 
 const GameOverScreen = () => {
-  return (
-    <Text>
-      Game Screen
-    </Text>
-  )
-}
+  return <Text>Game Screen</Text>;
+};
 
-export default GameOverScreen
+export default GameOverScreen;
